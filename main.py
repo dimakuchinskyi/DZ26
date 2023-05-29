@@ -19,3 +19,4 @@ try:
     print("Дані отримано успішно.")
 except InvalidUrlError as e:
     print(f"Помилка при запиті URL: {e.url}")
+''
