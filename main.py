@@ -1,31 +1,25 @@
-class UserNotFoundError(Exception):
-    pass
-class User:
-    def __init__(self, username):
-        self.username = username
-class UserDatabase:
-    def __init__(self):
-        self.users = {}
-    def add_user(self, user):
-        self.users[user.username] = user
-    def get_user(self, username):
-        if username in self.users:
-            return self.users[username]
-        else:
-            raise UserNotFoundError(f"User '{username}' not found")
-db = UserDatabase()
-user1 = User("максік")
-user2 = User("діма")
-db.add_user(user1)
-db.add_user(user2)
+class TemperatureConverter:
+    @staticmethod
+    def celsius_to_fahrenheit(celsius):
+        if celsius < -273.15:
+            raise ValueError("Temperature value is below absolute zero.")
+        fahrenheit = celsius * 9/5 + 32
+        return fahrenheit
+    @staticmethod
+    def fahrenheit_to_celsius(fahrenheit):
+        if fahrenheit < -459.67:
+            raise ValueError("Temperature value is below absolute zero.")
+        celsius = (fahrenheit - 32) * 5/9
+        return celsius
 try:
-    user = db.get_user("максік")
-    print(f"Username: {user.username}")
-except UserNotFoundError as e:
-    print(str(e))
-
-try:
-    user = db.get_user("глеп")
-    print(f"Username: {user.username}")
-except UserNotFoundError as e:
-    print(str(e))
+    celsius = 25
+    fahrenheit = TemperatureConverter.celsius_to_fahrenheit(celsius)
+    print(f"{celsius} Celsius = {fahrenheit} Fahrenheit")
+    fahrenheit = 77
+    celsius = TemperatureConverter.fahrenheit_to_celsius(fahrenheit)
+    print(f"{fahrenheit} Fahrenheit = {celsius} Celsius")
+    celsius = -300
+    fahrenheit = TemperatureConverter.celsius_to_fahrenheit(celsius)
+    print(f"{celsius} Celsius = {fahrenheit} Fahrenheit")
+except ValueError as e:
+    print("ValueError:", str(e))
